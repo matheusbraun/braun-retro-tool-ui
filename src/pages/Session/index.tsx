@@ -1,9 +1,9 @@
 import React from 'react';
 
-// import { Container } from './styles';
+import Timer from '../../components/Timer';
 
-const Room: React.FC = () => {
-  return <div>SESSION</div>;
+const Session: React.FC = () => {
+  return <Timer />;
 };
 
-export default Room;
+export default Session;
