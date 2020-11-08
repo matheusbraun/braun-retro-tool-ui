@@ -1,12 +1,13 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
+import Button from '../../components/Button';
+import Container from '../../components/Container';
+import Input from '../../components/Input';
 
-// import { logIn } from '../../services/api';
 import { useAuth } from '../../hooks/useAuth';
-// import './styles.css';
 
 const Login = () => {
-  const [user, setUser] = useState({ username: '', password: '' });
+  const [username, setUsername] = useState('');
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -14,14 +15,14 @@ const Login = () => {
   const history = useHistory();
   const location = useLocation();
 
-  // useEffect(() => {
-  //   if (authContext?.isAuthenticated) history.replace('/');
-  // }, [authContext?.isAuthenticated, history]);
+  useEffect(() => {
+    if (authContext?.isAuthenticated) history.replace('/');
+  }, [authContext?.isAuthenticated, history]);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+    const { value } = e.target;
 
-    setUser({ ...user, [name]: value });
+    setUsername(value);
   };
 
   const logIn = () =>
@@ -40,6 +41,7 @@ const Login = () => {
       await logIn();
 
       authContext?.setIsAuthenticated();
+      authContext?.setNewUsername(username);
 
       const { from } = (location.state as any) || { from: '/' };
 
@@ -51,34 +53,20 @@ const Login = () => {
   };
 
   return (
-    // <Container>
-    <>
-      <h1 className="login-form-title">Acessar o sistema</h1>
+    <Container>
       <form className="login-form" onSubmit={handleSubmit} autoComplete="off">
-        <input
-          // label="Usuário"
+        <Input
+          placeholder="Enter your name"
           name="username"
           disabled={loading}
-          onChange={handleOnChange}
-          value={user.username}
-          required={true}
-        />
-        <input
-          // label="Senha"
-          name="password"
-          type="password"
-          disabled={loading}
-          onChange={handleOnChange}
-          value={user.password}
-          required={true}
+          onChangeCallback={handleOnChange}
+          value={username}
+          required
         />
         {error && <span className="error-message">{error}</span>}
-        <button type="submit" disabled={loading}>
-          Entrar
-        </button>
+        <Button type="submit" disabled={loading} title="Enter" />
       </form>
-    </>
-    // </Container>
+    </Container>
   );
 };
 
