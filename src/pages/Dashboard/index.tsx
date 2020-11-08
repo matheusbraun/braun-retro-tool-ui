@@ -52,7 +52,7 @@ const Dashboard: React.FC = () => {
           placeholder="Room name"
           name="username"
           disabled={loading}
-          onChangeCallback={handleOnChange}
+          onChange={handleOnChange}
           value={roomName}
           required
         />

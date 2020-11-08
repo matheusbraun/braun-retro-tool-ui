@@ -5,7 +5,7 @@ import './styles.css';
 type Props = {
   name: string;
   disabled?: boolean;
-  onChangeCallback?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   value: string;
   required?: boolean;
   type?: string;
@@ -15,7 +15,7 @@ type Props = {
 const Input = ({
   name,
   disabled = false,
-  onChangeCallback,
+  onChange,
   value,
   required = false,
   type = 'text',
@@ -25,7 +25,7 @@ const Input = ({
     <input
       name={name}
       disabled={disabled}
-      onChange={onChangeCallback}
+      onChange={onChange}
       value={value}
       type={type}
       required={required}

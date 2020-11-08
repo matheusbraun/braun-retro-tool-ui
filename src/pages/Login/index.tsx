@@ -59,7 +59,7 @@ const Login = () => {
           placeholder="Enter your name"
           name="username"
           disabled={loading}
-          onChangeCallback={handleOnChange}
+          onChange={handleOnChange}
           value={username}
           required
         />
