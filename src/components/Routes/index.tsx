@@ -3,12 +3,16 @@ import { Route } from 'react-router-dom';
 
 import PrivateRoute from './PrivateRoute';
 import Login from '../../pages/Login';
-import Room from '../../pages/Room';
+import Session from '../../pages/Session';
+import Dashboard from '../../pages/Dashboard';
 
 const Routes = () => (
   <>
     <PrivateRoute exact path="/">
-      <Room />
+      <Dashboard />
+    </PrivateRoute>
+    <PrivateRoute path="/session/:sessionid">
+      <Session />
     </PrivateRoute>
     <Route path="/login" component={Login} />
   </>
