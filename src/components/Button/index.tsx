@@ -5,23 +5,23 @@ import './styles.css';
 type Props = {
   type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
-  onClickCallback?: () => void;
-  cssClass?: string;
+  onClick?: () => void;
+  className?: string;
   title: string;
 };
 
 const Button = ({
   type = 'button',
   disabled = false,
-  onClickCallback,
-  cssClass = '',
+  onClick,
+  className,
   title,
 }: Props) => (
   <button
     type={type}
     disabled={disabled}
-    onClick={onClickCallback}
-    className={`ui-button ${cssClass}`}
+    onClick={onClick}
+    className={`ui-button ${className}`}
   >
     {title}
   </button>
