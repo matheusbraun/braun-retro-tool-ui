@@ -3,7 +3,6 @@ import React from 'react';
 import './styles.css';
 
 type Props = {
-  label: string;
   name: string;
   disabled?: boolean;
   onChangeCallback?: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -14,7 +13,6 @@ type Props = {
 };
 
 const Input = ({
-  label,
   name,
   disabled = false,
   onChangeCallback,
@@ -24,7 +22,6 @@ const Input = ({
   placeholder,
 }: Props) => (
   <div className="input-block">
-    {/* <label htmlFor={name}>{label}</label> */}
     <input
       name={name}
       disabled={disabled}
