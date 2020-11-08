@@ -1,7 +1,9 @@
 import React, { createContext, useState, useCallback } from 'react';
 
 type AuthContextType = {
+  username: string;
   isAuthenticated: boolean;
+  setNewUsername: (username: string) => void;
   setIsAuthenticated: () => void;
   removeIsAuthenticated: () => void;
 };
@@ -16,6 +18,15 @@ const AuthProvider: React.FC = ({ children }) => {
   );
   const [authenticated, setAuthenticated] = useState(Boolean(prevAuth));
 
+  const prevUsername =
+    window.localStorage.getItem('braunretrotool:username') || '';
+  const [username, setUsername] = useState(prevUsername);
+
+  const setNewUsername = useCallback((username: string) => {
+    window.localStorage.setItem('braunretrotool:username', username);
+    setUsername(username);
+  }, []);
+
   const setIsAuthenticated = useCallback(() => {
     window.localStorage.setItem('braunretrotool:isAuthenticated', 'true');
     setAuthenticated(true);
@@ -23,11 +34,15 @@ const AuthProvider: React.FC = ({ children }) => {
 
   const removeIsAuthenticated = useCallback(() => {
     window.localStorage.removeItem('braunretrotool:isAuthenticated');
+    window.localStorage.removeItem('braunretrotool:username');
     setAuthenticated(false);
+    setUsername('');
   }, []);
 
   const defaultValues = {
+    username,
     isAuthenticated: authenticated,
+    setNewUsername,
     setIsAuthenticated,
     removeIsAuthenticated,
   };
