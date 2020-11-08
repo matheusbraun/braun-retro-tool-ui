@@ -1,0 +1,31 @@
+.topnav {
+  background-color: #20b2aa;
+  overflow: hidden;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* .topnav img {
+  padding: 10px;
+  height: 100%;
+} */
+
+.topnav button {
+  padding: 5px 16px;
+  margin-right: 20px;
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 20px;
+}
+
+/* .topnav img:hover {
+  cursor: pointer;
+} */
+
+.topnav button:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
