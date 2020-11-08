@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Route } from 'react-router-dom';
 
 import PrivateRoute from './PrivateRoute';
@@ -18,4 +18,4 @@ const Routes = () => (
   </>
 );
 
-export default Routes;
+export default memo(Routes);

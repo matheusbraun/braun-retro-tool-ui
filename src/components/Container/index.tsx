@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import './styles.css';
 
-const Container: React.FC = ({ children }) => (
+type Props = {
+  children?: React.ReactNode;
+};
+
+const Container = ({ children }: Props) => (
   <div className="container">{children}</div>
 );
 
-export default Container;
+export default memo(Container);

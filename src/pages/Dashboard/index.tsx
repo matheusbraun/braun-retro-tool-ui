@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import Container from '../../components/Container';
@@ -63,4 +63,4 @@ const Dashboard: React.FC = () => {
   );
 };
 
-export default Dashboard;
+export default memo(Dashboard);

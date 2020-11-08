@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, memo } from 'react';
 
 const Timer = () => {
   const [seconds, setSeconds] = useState(0);
@@ -44,4 +44,4 @@ const Timer = () => {
   );
 };
 
-export default Timer;
+export default memo(Timer);

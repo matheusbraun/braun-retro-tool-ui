@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import Button from '../../components/Button';
 import Container from '../../components/Container';
@@ -70,4 +70,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default memo(Login);

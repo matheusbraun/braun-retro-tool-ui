@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import './styles.css';
 
@@ -34,4 +34,4 @@ const Input = ({
   </div>
 );
 
-export default Input;
+export default memo(Input);

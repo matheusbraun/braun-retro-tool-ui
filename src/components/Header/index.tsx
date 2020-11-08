@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useHistory } from 'react-router-dom';
 
 // import logo from '../../assets/images/iconfinder_dragon_64px.png';
@@ -30,4 +30,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default memo(Header);
