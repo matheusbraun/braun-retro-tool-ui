@@ -27,9 +27,9 @@
   font-size: 20px;
 }
 
-/* .topnav img:hover {
+.topnav .logo svg:hover {
   cursor: pointer;
-} */
+}
 
 .topnav button:hover {
   cursor: pointer;
