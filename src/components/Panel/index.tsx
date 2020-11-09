@@ -1,45 +1,60 @@
 import React, { useState } from 'react';
 
 import Input from '../Input';
-import GoodLogo from '../../assets/images/iconfinder_good.svg';
-import BadLogo from '../../assets/images/iconfinder_bad.svg';
-import Wondering from '../../assets/images/iconfinder_wondering.svg';
+import HeaderImage from './HeaderImage';
+import PanelItem from './PanelItem';
 
 import './styles.css';
 
-type PanelType = 'good' | 'wondering' | 'bad';
+export type PanelType = 'good' | 'wondering' | 'bad';
 
 type Props = {
   type: PanelType;
+  onSubmit: (value: string) => void;
+  onRemove: (id: number) => void;
+  panelItems: Array<string>;
 };
 
-const Panel = ({ type }: Props) => {
+const Panel = ({ type, onSubmit, onRemove, panelItems }: Props) => {
   const [inputValue, setInputValue] = useState('');
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
 
-  const HeaderImage = () => {
-    if (type === 'good') return <img src={GoodLogo} alt="Goo panel icon" />;
+  const handleOnKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      e.stopPropagation();
 
-    if (type === 'bad') return <img src={BadLogo} alt="Bad panel icon" />;
-
-    return <img src={Wondering} alt="Wondering panel icon" />;
+      setInputValue('');
+      onSubmit(inputValue);
+    }
   };
 
   return (
     <div className={`panel panel-${type}`}>
       <div className="panel-header">
-        <HeaderImage />
+        <HeaderImage type={type} />
       </div>
       <Input
         name={`input-${type}`}
         placeholder={getPlaceholderByPanelType(type)}
         value={inputValue}
         onChange={handleOnChange}
+        onKeyDown={handleOnKeyDown}
         required
       />
+      <div className="panel-items">
+        {panelItems.map((item, index) => (
+          <PanelItem
+            index={index}
+            text={item}
+            type={type}
+            onRemove={onRemove}
+          />
+        ))}
+      </div>
     </div>
   );
 };

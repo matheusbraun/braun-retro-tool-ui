@@ -1,7 +1,7 @@
 .panel {
   display: flex;
   flex-direction: column;
-  min-height: 300px;
+  min-height: 312px;
   border-radius: 10px;
   width: 33.3333%;
   padding: 10px;
