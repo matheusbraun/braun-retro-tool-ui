@@ -21,11 +21,11 @@ const Panel = ({ type }: Props) => {
   };
 
   const HeaderImage = () => {
-    if (type === 'good') return <img src={GoodLogo} alt="text" />;
+    if (type === 'good') return <img src={GoodLogo} alt="Goo panel icon" />;
 
-    if (type === 'bad') return <img src={BadLogo} alt="text" />;
+    if (type === 'bad') return <img src={BadLogo} alt="Bad panel icon" />;
 
-    return <img src={Wondering} alt="text" />;
+    return <img src={Wondering} alt="Wondering panel icon" />;
   };
 
   return (
