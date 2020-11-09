@@ -33,6 +33,7 @@ const Input = ({
       type={type}
       required={required}
       placeholder={placeholder}
+      autoComplete="off"
     />
   </div>
 );
