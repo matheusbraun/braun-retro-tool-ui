@@ -1,3 +1,5 @@
+import { faTools } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { memo } from 'react';
 import { useHistory } from 'react-router-dom';
 
@@ -16,13 +18,16 @@ const Header = () => {
     history.push('/login');
   };
 
-  // const handleLogoClick = () => {
-  //   if (authContext?.isAuthenticated) history.push('/');
-  // };
+  const handleLogoClick = () => {
+    if (authContext?.isAuthenticated) history.push('/');
+  };
 
   return (
     <div className="topnav">
-      {/* <img src={logo} alt="App Logo" onClick={handleLogoClick} /> */}
+      <div className="logo">
+        <FontAwesomeIcon icon={faTools} onClick={handleLogoClick} />
+        <span>Braun Retro Tool</span>
+      </div>
       {authContext?.isAuthenticated && (
         <button onClick={handleLogoutClick}>Sign Out</button>
       )}

@@ -7,10 +7,16 @@
   align-items: center;
 }
 
-/* .topnav img {
+.topnav .logo {
   padding: 10px;
-  height: 100%;
-} */
+  font-weight: 700;
+  font-size: 28px;
+}
+
+.topnav .logo span {
+  margin-left: 10px;
+  color: white;
+}
 
 .topnav button {
   padding: 5px 16px;
