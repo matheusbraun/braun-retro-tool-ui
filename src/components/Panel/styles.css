@@ -1,0 +1,35 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 300px;
+  border-radius: 10px;
+  width: 33.3333%;
+  padding: 10px;
+}
+
+.panel.panel-good {
+  background-color: seagreen;
+}
+
+.panel.panel-wondering {
+  background-color: orange;
+}
+
+.panel.panel-bad {
+  background-color: brown;
+}
+.panel .panel-header {
+  margin: 10px 0;
+  text-align: center;
+}
+
+.panel .panel-header img{
+  height: 90px;
+}
+
+.panel input {
+  border-radius: 10px;
+  padding: 10px;
+  height: 50px;
+  font-size: 18px;
+}
