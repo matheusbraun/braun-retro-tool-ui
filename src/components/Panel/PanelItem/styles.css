@@ -1,0 +1,40 @@
+.panel-item {
+  display: flex;
+  border-radius: 10px;
+  padding: 30px 20px;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.panel-item.good {
+  background-color: mediumseagreen;
+}
+
+.panel-item.wondering {
+  background-color: lightyellow;
+}
+
+.panel-item.bad {
+  background-color: tomato;
+}
+
+.panel-item + .panel-item {
+  margin-top: 0px;
+}
+
+.panel-item svg {
+  cursor: pointer;
+}
+
+.panel-item .panel-item-like {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.panel-item .panel-item-like span {
+  font-size: 12px;
+}
