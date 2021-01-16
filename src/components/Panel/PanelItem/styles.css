@@ -5,6 +5,7 @@
   margin-top: 20px;
   margin-bottom: 15px;
   align-items: center;
+  flex-wrap: wrap;
   justify-content: space-between;
 }
 
@@ -33,8 +34,26 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-size: 12px;
+  margin-top: 10px;
 }
 
 .panel-item .panel-item-like span {
   font-size: 12px;
+}
+
+.panel-item .panel-item-text {
+  margin-bottom: 10px;
+  word-wrap: break-word;
+  width: 100%;
+}
+
+.panel-item .panel-item-author {
+  margin-top: 10px;
+  font-size: 12px;
+  font-style: italic;
+}
+
+.panel-item .remove-icon {
+  font-size: 12px
 }

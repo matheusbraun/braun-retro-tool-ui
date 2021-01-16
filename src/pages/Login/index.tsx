@@ -28,7 +28,7 @@ const Login = () => {
   const logIn = () =>
     new Promise((resolve, reject) => {
       setTimeout(() => {
-        resolve();
+        resolve(true);
       }, 500);
     });
 
