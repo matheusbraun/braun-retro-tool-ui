@@ -10,7 +10,7 @@ import AuthProvider from './context/Auth';
 import './index.css';
 
 const link = new WebSocketLink({
-  uri: `ws://braun-retro-tool-api.vercel.app`,
+  uri: `wss://braun-retro-tool-api.vercel.app`,
   options: {
     reconnect: true,
   },
