@@ -11,8 +11,8 @@ export type PanelType = 'good' | 'wondering' | 'bad';
 type Props = {
   type: PanelType;
   onSubmit: (value: string) => void;
-  onRemove: (id: number) => void;
-  panelItems: Array<string>;
+  onRemove: (id: string) => void;
+  panelItems: Array<any> | undefined;
 };
 
 const Panel = ({ type, onSubmit, onRemove, panelItems }: Props) => {
@@ -46,12 +46,12 @@ const Panel = ({ type, onSubmit, onRemove, panelItems }: Props) => {
         required
       />
       <div className="panel-items">
-        {panelItems.map((item, index) => (
+        {panelItems?.map(item => (
           <PanelItem
-            index={index}
-            text={item}
+            card={item}
             type={type}
             onRemove={onRemove}
+            key={item.id}
           />
         ))}
       </div>

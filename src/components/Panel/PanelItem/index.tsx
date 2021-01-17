@@ -1,42 +1,57 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { faHeart, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { gql, useMutation } from '@apollo/client';
 
 import { PanelType } from '..';
 import { useAuth } from '../../../hooks/useAuth';
 
 import './styles.css';
 
-type Props = {
-  text: string;
-  index: number;
-  type: PanelType;
-  onRemove: (id: number) => void;
+const INCREASE_LIKES = gql`
+  mutation($id: String!) {
+    increaseLikes(id: $id)
+  }
+`;
+
+type Card = {
+  id: string;
+  user: string;
+  content: string;
+  likes: number;
 };
 
-const PanelItem = ({ text, index, type, onRemove }: Props) => {
-  const [likes, setLikes] = useState(0);
+type Props = {
+  card: Card;
+  type: PanelType;
+  onRemove: (id: string) => void;
+};
 
+const PanelItem = ({ card, type, onRemove }: Props) => {
   const authContext = useAuth();
 
+  const [increaseLikes] = useMutation(INCREASE_LIKES);
+
   return (
-    <div className={`panel-item ${type}`} key={index}>
-      <span className="panel-item-text">{text}</span>
+    <div className={`panel-item ${type}`}>
+      <span className="panel-item-text">{card.content}</span>
       <div className="panel-item-like">
         <FontAwesomeIcon
           icon={faHeart}
           title="Like"
-          onClick={() => setLikes(likes => likes + 1)}
+          onClick={() => increaseLikes({ variables: { id: card.id } })}
         />
-        <span>{likes}</span>
+        <span>{card.likes}</span>
       </div>
-      <div className="panel-item-author">{authContext?.username}</div>
-      <FontAwesomeIcon
-        icon={faTrash}
-        title="Remove"
-        onClick={() => onRemove(index)}
-        className="remove-icon"
-      />
+      <div className="panel-item-author">{card.user}</div>
+      {card.user === authContext?.username && (
+        <FontAwesomeIcon
+          icon={faTrash}
+          title="Remove"
+          onClick={() => onRemove(card.id)}
+          className="remove-icon"
+        />
+      )}
     </div>
   );
 };
