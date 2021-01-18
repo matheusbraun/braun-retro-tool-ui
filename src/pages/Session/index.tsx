@@ -1,26 +1,33 @@
 import React, { memo } from 'react';
 import { gql, useMutation, useSubscription } from '@apollo/client';
+import { useParams } from 'react-router-dom';
 
 import Panel, { PanelType } from '../../components/Panel';
-
-import './styles.css';
 import { useAuth } from '../../hooks/useAuth';
 
+import './styles.css';
+
 const GET_CARDS = gql`
-  subscription {
-    cards {
+  subscription($roomId: String!) {
+    cards(roomId: $roomId) {
       id
       content
       user
       type
       likes
+      roomId
     }
   }
 `;
 
 const POST_CARD = gql`
-  mutation($user: String!, $content: String!, $type: String!) {
-    postCard(user: $user, content: $content, type: $type)
+  mutation(
+    $user: String!
+    $content: String!
+    $type: String!
+    $roomId: String!
+  ) {
+    postCard(user: $user, content: $content, type: $type, roomId: $roomId)
   }
 `;
 
@@ -30,25 +37,45 @@ const DELETE_CARD = gql`
   }
 `;
 
-const Session: React.FC = () => {
+type Param = {
+  sessionid: string;
+};
+
+const Session = () => {
   const authContext = useAuth();
 
+  const { sessionid: roomId } = useParams<Param>();
+
   const { data } = useSubscription<{
-    cards: Array<{ id: string; user: string; type: string; likes: number }>;
-  }>(GET_CARDS);
+    cards: Array<{
+      id: string;
+      user: string;
+      type: string;
+      likes: number;
+      roomId: string;
+    }>;
+  }>(GET_CARDS, { variables: { roomId } });
 
   const [postCard] = useMutation(POST_CARD);
   const [deleteCard] = useMutation(DELETE_CARD);
 
-  const goodData = data?.cards?.filter(card => card.type === 'good')?.reverse();
-  const wonderingData = data?.cards
+  const cardsFilteredByRoomId = data?.cards?.filter(
+    card => card.roomId === roomId,
+  );
+
+  const goodData = cardsFilteredByRoomId
+    ?.filter(card => card.type === 'good')
+    ?.reverse();
+  const wonderingData = cardsFilteredByRoomId
     ?.filter(card => card.type === 'wondering')
     ?.reverse();
-  const badData = data?.cards?.filter(card => card.type === 'bad')?.reverse();
+  const badData = cardsFilteredByRoomId
+    ?.filter(card => card.type === 'bad')
+    ?.reverse();
 
   const handleSubmit = (type: PanelType, value: string) => {
     postCard({
-      variables: { user: authContext?.username, content: value, type },
+      variables: { user: authContext?.username, content: value, type, roomId },
     });
   };
 
