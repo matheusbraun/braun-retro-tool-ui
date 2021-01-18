@@ -10,7 +10,7 @@ import AuthProvider from './context/Auth';
 import './index.css';
 
 const link = new WebSocketLink({
-  uri: `wss://braun-retro-tool-api.vercel.app`,
+  uri: `wss://braun-retro-tool-api.herokuapp.com/`,
   options: {
     reconnect: true,
   },
@@ -18,7 +18,7 @@ const link = new WebSocketLink({
 
 const client = new ApolloClient({
   link,
-  uri: 'https://braun-retro-tool-api.vercel.app/',
+  uri: 'https://braun-retro-tool-api.herokuapp.com/',
   cache: new InMemoryCache(),
 });
 
