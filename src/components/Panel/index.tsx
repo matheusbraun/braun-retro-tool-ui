@@ -27,8 +27,10 @@ const Panel = ({ type, onSubmit, onRemove, panelItems }: Props) => {
       e.preventDefault();
       e.stopPropagation();
 
-      setInputValue('');
-      onSubmit(inputValue);
+      if (!!inputValue.trim()) {
+        setInputValue('');
+        onSubmit(inputValue.trim());
+      }
     }
   };
 
