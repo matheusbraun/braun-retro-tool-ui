@@ -14,11 +14,18 @@ const INCREASE_LIKES = gql`
   }
 `;
 
+const CHECK_CARD = gql`
+  mutation($id: String!) {
+    checkCard(id: $id)
+  }
+`;
+
 type Card = {
   id: string;
   user: string;
   content: string;
   likes: number;
+  isChecked: boolean;
 };
 
 type Props = {
@@ -31,27 +38,37 @@ const PanelItem = ({ card, type, onRemove }: Props) => {
   const authContext = useAuth();
 
   const [increaseLikes] = useMutation(INCREASE_LIKES);
+  const [checkCard] = useMutation(CHECK_CARD);
 
   return (
-    <div className={`panel-item ${type}`}>
-      <span className="panel-item-text">{card.content}</span>
-      <div className="panel-item-like">
-        <FontAwesomeIcon
-          icon={faHeart}
-          title="Like"
-          onClick={() => increaseLikes({ variables: { id: card.id } })}
+    <div className={`panel-item ${type} ${card.isChecked ? 'checked' : ''}`}>
+      <div className="panel-item-check">
+        <input
+          type="checkbox"
+          onChange={() => checkCard({ variables: { id: card.id } })}
+          checked={card.isChecked}
         />
-        <span>{card.likes}</span>
       </div>
-      <div className="panel-item-author">{card.user}</div>
-      {card.user === authContext?.username && (
-        <FontAwesomeIcon
-          icon={faTrash}
-          title="Remove"
-          onClick={() => onRemove(card.id)}
-          className="remove-icon"
-        />
-      )}
+      <div className="panel-item-content">
+        <span className="panel-item-text">{card.content}</span>
+        <div className="panel-item-like">
+          <FontAwesomeIcon
+            icon={faHeart}
+            title="Like"
+            onClick={() => increaseLikes({ variables: { id: card.id } })}
+          />
+          <span>{card.likes}</span>
+        </div>
+        <div className="panel-item-author">{card.user}</div>
+        {card.user === authContext?.username && (
+          <FontAwesomeIcon
+            icon={faTrash}
+            title="Remove"
+            onClick={() => onRemove(card.id)}
+            className="remove-icon"
+          />
+        )}
+      </div>
     </div>
   );
 };

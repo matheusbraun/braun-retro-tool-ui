@@ -16,6 +16,7 @@ const GET_CARDS = gql`
       type
       likes
       roomId
+      isChecked
     }
   }
 `;
@@ -53,6 +54,7 @@ const Session = () => {
       type: string;
       likes: number;
       roomId: string;
+      isChecked: boolean;
     }>;
   }>(GET_CARDS, { variables: { roomId } });
 

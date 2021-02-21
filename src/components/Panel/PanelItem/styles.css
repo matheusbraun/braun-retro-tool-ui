@@ -21,12 +21,28 @@
   background-color: tomato;
 }
 
+.panel-item.checked {
+  opacity: 0.5;
+}
+
 .panel-item + .panel-item {
   margin-top: 0px;
 }
 
 .panel-item svg {
   cursor: pointer;
+}
+
+.panel-item .panel-item-check {
+  width: 10%;
+}
+
+.panel-item .panel-item-content {
+  width: 89%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .panel-item .panel-item-like {
@@ -55,5 +71,5 @@
 }
 
 .panel-item .remove-icon {
-  font-size: 12px
+  font-size: 12px;
 }
